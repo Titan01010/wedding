@@ -4,17 +4,15 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>Руслан & Розалия — 08.08.2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght=0,400;0,600;0,700;1,400&family=Jost:wght=300;400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght=0,400;0,500;0,600;0,700;1,400&family=Jost:wght=300;400;500;600&family=Playfair+Display:ital,wght=0,400;0,600;1,400&display=swap" rel="stylesheet" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
     --bg-gradient: linear-gradient(180deg, #FBF8F3 0%, #F5EDE0 30%, #F0E2D3 60%, #FBF8F3 100%);
-    --cream: #FAF5EB;
     --gold-linear: linear-gradient(135deg, #B38E36 0%, #F5E5C0 50%, #D4AF37 100%);
     --gold-solid: #C9A84C;
     --gold-dark: #8A6D25;
-    --rose: #BC7668;
     --dark: #1E1A17;
     --text: #3D352E;
     --text-light: #706255;
@@ -31,91 +29,61 @@
     overflow-x: hidden; 
     position: relative;
     -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Размытые фоновые элементы уменьшены для мобильных, чтобы не перегружать процессор телефона */
+  /* Стили для плавной анимации при скролле */
+  .fade-in-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s cubic-bezier(0.215, 0.610, 0.355, 1), transform 1s cubic-bezier(0.215, 0.610, 0.355, 1);
+    will-change: transform, opacity;
+  }
+
+  .fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   .bg-blur {
-    position: absolute;
-    border-radius: 50%;
-    mix-blend-mode: multiply;
-    filter: blur(60px);
-    opacity: 0.18;
-    z-index: 0;
-    pointer-events: none;
+    position: absolute; border-radius: 50%; mix-blend-mode: multiply; filter: blur(60px); opacity: 0.18; z-index: 0; pointer-events: none;
   }
   .blur-1 { top: 15%; left: -50px; width: 250px; height: 250px; background: #EADBC8; }
   .blur-2 { top: 35%; right: -50px; width: 280px; height: 280px; background: #E2C792; }
   .blur-3 { top: 55%; left: -30px; width: 220px; height: 220px; background: #FFF2CC; }
   .blur-4 { top: 75%; right: -30px; width: 260px; height: 260px; background: #BC7668; }
 
-  /* Адаптивные разделители */
-  .section-divider {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 40px auto;
-    max-width: 80%;
-    position: relative;
-    z-index: 2;
-  }
-  .section-divider::before, .section-divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(to var(--direction, right), transparent, var(--gold-solid));
-  }
+  .section-divider { display: flex; justify-content: center; align-items: center; margin: 40px auto; max-width: 80%; position: relative; z-index: 2; }
+  .section-divider::before, .section-divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to var(--direction, right), transparent, var(--gold-solid)); }
   .section-divider::before { --direction: right; }
   .section-divider::after { --direction: left; }
-  
   .divider-center { display: flex; align-items: center; gap: 6px; margin: 0 12px; }
   .divider-diamond { width: 8px; height: 8px; background: var(--gold-solid); transform: rotate(45deg); }
   .divider-dot { width: 4px; height: 4px; background: var(--gold-solid); border-radius: 50%; }
 
   .petal-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
 
-  /* Шапка выбора языка */
   .lang-bar {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: center; padding: 12px 0;
-    background: rgba(251, 248, 243, 0.95); backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(201,168,76,0.25);
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: center; padding: 12px 0;
+    background: rgba(251, 248, 243, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(201,168,76,0.25);
   }
-  .lang-btn {
-    background: none; border: 1px solid rgba(201,168,76,0.3); color: var(--text);
-    font-size: 11px; letter-spacing: 2px; text-transform: uppercase; padding: 6px 20px;
-    cursor: pointer; transition: all 0.3s ease;
-  }
+  .lang-btn { background: none; border: 1px solid rgba(201,168,76,0.3); color: var(--text); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; padding: 6px 20px; cursor: pointer; transition: all 0.3s ease; }
   .lang-btn:first-child { border-radius: 4px 0 0 4px; }
   .lang-btn:last-child  { border-radius: 0 4px 4px 0; }
   .lang-btn.active, .lang-btn:hover { background: var(--gold-linear); color: var(--dark); border-color: var(--gold-solid); font-weight: 500; }
 
-  /* Главный экран */
   .hero {
-    min-height: 100vh; display: flex; flex-direction: column; align-items: center;
-    justify-content: center; text-align: center; padding: 100px 16px 40px; position: relative;
+    min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 100px 16px 40px; position: relative;
     background: linear-gradient(rgba(30, 26, 23, 0.45), rgba(30, 26, 23, 0.55)), 
                 url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&q=80&w=1200') center/cover no-repeat;
   }
   
-  .wedding-title {
-    font-size: clamp(11px, 3.5vw, 14px); letter-spacing: 4px; color: #FFFDFC; text-transform: uppercase;
-    font-weight: 500; margin-bottom: 15px; text-shadow: 0 2px 8px rgba(0,0,0,0.6);
-  }
-
-  .hero-names { 
-    font-family: 'Cormorant Garamond', serif; font-weight: 700; 
-    font-size: clamp(48px, 14vw, 90px); line-height: 0.95; color: #FFFDFC; 
-    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.75); margin-bottom: 20px; 
-  }
+  .wedding-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(15px, 4.5vw, 19px); letter-spacing: 3px; color: #FFFDFC; margin-bottom: 15px; text-shadow: 0 2px 8px rgba(0,0,0,0.4); text-transform: lowercase; }
+  .hero-names { font-family: 'Playfair Display', serif; font-weight: 600; font-size: clamp(52px, 15vw, 95px); line-height: 0.95; color: #FFFDFC; text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); margin-bottom: 20px; }
   .hero-names em { font-style: italic; color: #F5E5C0; font-weight: 400; }
-  
-  .hero-ampersand { 
-    display: block; font-size: clamp(36px, 10vw, 60px); color: #F5E5C0; 
-    margin: 5px 0; font-weight: 400;
-  }
+  .hero-ampersand { display: block; font-family: 'Cormorant Garamond', serif; font-size: clamp(38px, 11vw, 65px); color: #F5E5C0; margin: 5px 0; font-weight: 400; }
 
-  /* Интерактивный конверт (Полностью резиновый) */
   .envelope-container { width: 100%; max-width: 350px; margin: 0 auto; position: relative; z-index: 5; padding: 0 8px; }
   .envelope-wrapper { position: relative; width: 100%; padding-bottom: 66%; perspective: 1500px; z-index: 10; }
   .envelope { position: absolute; inset: 0; background: #efe5d0; border-radius: 4px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); cursor: pointer; }
@@ -136,93 +104,112 @@
 
   .click-hint { margin-top: 15px; font-size: 11px; color: #FFFDFC; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
 
-  .letter { position: absolute; inset: 8px 12px; background: #FFFDFC url('https://www.transparenttextures.com/patterns/soft-wallpaper.png'); border-radius: 4px; padding: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 2; border: 1px solid #D4AF37; transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-  .letter-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 5vw, 24px); color: var(--dark); margin-bottom: 4px; font-weight: 600; }
-  .letter-p { font-size: clamp(11px, 3.2vw, 13px); color: var(--text-light); line-height: 1.4; }
+  .letter { 
+    position: absolute; inset: 6px 10px; background: #FFFDFC url('https://www.transparenttextures.com/patterns/soft-wallpaper.png'); 
+    border-radius: 4px; padding: 12px 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 2; border: 1px solid #D4AF37; 
+    transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; 
+  }
+  .letter-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(16px, 4.5vw, 20px); color: var(--dark); margin-bottom: 6px; font-weight: 600; }
+  .letter-p { color: var(--text-light); font-family: 'Cormorant Garamond', serif; font-size: 15px; font-style: italic; line-height: 1.5; font-weight: 500; }
   
   .envelope-wrapper.open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
   .envelope-wrapper.open .envelope-seal { opacity: 0; transform: translate(-50%, -50%) scale(0.5); pointer-events: none; }
-  .envelope-wrapper.open .letter { transform: translateY(-63%); z-index: 8; box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
+  .envelope-wrapper.open .letter { transform: translateY(-64%); z-index: 8; box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
 
-  .deco-bow, .deco-heart { display: inline-block; width: 28px; height: 28px; background-size: contain; background-repeat: no-repeat; background-position: center; vertical-align: middle; }
+  .deco-bow { display: inline-block; width: 28px; height: 28px; background-size: contain; background-repeat: no-repeat; background-position: center; vertical-align: middle; }
   .deco-bow { background-image: url('https://img.icons8.com/color/96/ribbon-bow.png'); }
-  .deco-heart { background-image: url('https://img.icons8.com/color/96/hearts.png'); }
 
-  /* Таймер */
+  .animated-heart {
+    width: 55px; height: 55px; margin: 0 auto 15px;
+    background: url('https://img.icons8.com/emoji/96/heart-suit.png') center/contain no-repeat;
+    filter: drop-shadow(0 2px 8px rgba(188,118,104,0.4));
+    animation: heartBeat 1.4s infinite ease-in-out;
+  }
+
+  @keyframes heartBeat {
+    0% { transform: scale(1); }
+    14% { transform: scale(1.2); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.15); }
+    70% { transform: scale(1); }
+  }
+
+  .parents-section { padding: 20px 16px; display: flex; justify-content: center; position: relative; z-index: 2; }
+  .parents-card { 
+    background: rgba(254, 251, 246, 0.95); 
+    padding: 35px 25px; max-width: 360px; width: 100%; text-align: center; 
+    position: relative; box-shadow: 0 10px 25px rgba(201,168,76,0.06);
+    border: 10px solid transparent;
+    border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M0,0 L60,0 L60,60 L0,60 Z' fill='none'/%3E%3Cpath d='M8,8 Q30,1 52,8 Q59,30 52,52 Q30,59 8,52 Q1,30 8,8' fill='none' stroke='%23C9A84C' stroke-width='1.5' stroke-dasharray='3 3'/%3E%3Cpath d='M5,5 Q30,-3 55,5 Q63,30 55,55 Q30,63 5,55 Q-3,30 5,5' fill='none' stroke='%238A6D25' stroke-width='1'/%3E%3C/svg%3E") 15 round;
+  }
+
   .timer-section { padding: 20px 16px; text-align: center; position: relative; z-index: 2; }
-  .timer-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 6vw, 26px); color: var(--gold-dark); margin-bottom: 20px; letter-spacing: 1px; text-transform: uppercase; font-weight: 600; }
-  .timer-container { display: flex; justify-content: center; gap: 8px; }
-  .timer-item { background: rgba(255, 253, 252, 0.95); border: 1px solid rgba(201,168,76,0.35); padding: 10px; min-width: 68px; flex: 0 1 75px; border-radius: 8px; box-shadow: 0 6px 15px rgba(201,168,76,0.08); }
-  .timer-val { display: block; font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 7vw, 32px); color: var(--dark); font-weight: 600; line-height: 1; }
-  .timer-label { display: block; font-size: 9px; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+  .timer-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(20px, 6vw, 25px); color: var(--gold-dark); margin-bottom: 22px; font-weight: 500; letter-spacing: 0.5px; }
+  .timer-container { display: flex; justify-content: center; gap: 10px; }
+  .timer-item { background: rgba(255, 253, 252, 0.95); border: 1px solid rgba(201,168,76,0.25); padding: 12px 10px; min-width: 72px; flex: 0 1 75px; border-radius: 8px; box-shadow: 0 6px 15px rgba(201,168,76,0.05); }
+  .timer-val { display: block; font-family: 'Cormorant Garamond', serif; font-size: clamp(26px, 7vw, 34px); color: var(--dark); font-weight: 500; line-height: 1; }
+  .timer-label { display: block; font-size: 9px; color: var(--text-light); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 5px; font-weight: 400; }
 
-  /* Стихотворение */
   .poem-section { padding: 20px 16px; display: flex; justify-content: center; position: relative; z-index: 2; }
-  .poem-card { background: rgba(255, 253, 252, 0.95); border: 1px solid rgba(201, 168, 76, 0.4); padding: 35px 20px; max-width: 550px; width: 100%; text-align: center; position: relative; box-shadow: 0 10px 30px rgba(61, 53, 46, 0.05); border-radius: 4px; }
-  .poem-card::after { content: ''; position: absolute; inset: 6px; border: 1px solid rgba(201, 168, 76, 0.2); pointer-events: none; }
-  .poem-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(16px, 4.8vw, 21px); line-height: 1.6; color: var(--text); }
+  .poem-card { background: rgba(255, 253, 252, 0.95); border: 1px solid rgba(201, 168, 76, 0.3); padding: 40px 25px; max-width: 520px; width: 100%; text-align: center; position: relative; box-shadow: 0 10px 30px rgba(61, 53, 46, 0.03); border-radius: 4px; }
+  .poem-card::after { content: ''; position: absolute; inset: 6px; border: 1px solid rgba(201, 168, 76, 0.15); pointer-events: none; }
+  .poem-text { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(16px, 4.5vw, 19px); line-height: 1.7; color: var(--text); letter-spacing: 0.2px; }
 
-  /* Таймлайн */
   .timeline-section { padding: 20px 16px; position: relative; z-index: 2; }
-  .timeline-title { text-align: center; font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 8vw, 42px); color: var(--dark); margin-bottom: 35px; font-weight: 400; }
+  .timeline-title { text-align: center; font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(28px, 8vw, 36px); color: var(--dark); margin-bottom: 40px; font-weight: 500; }
   .timeline-container { position: relative; max-width: 400px; margin: 0 auto; padding-left: 35px; }
-  .timeline-path { position: absolute; left: 12px; top: 0; height: 100%; width: 2px; border-left: 2px dashed var(--gold-solid); opacity: 0.6; }
+  .timeline-path { position: absolute; left: 12px; top: 0; height: 100%; width: 2px; border-left: 2px dashed var(--gold-solid); opacity: 0.5; }
   .timeline-item { position: relative; padding-bottom: 35px; }
-  .timeline-dot { position: absolute; left: -30px; top: 4px; width: 14px; height: 14px; background: var(--gold-linear); border-radius: 50%; z-index: 3; border: 2px solid #FFFDFC; }
-  .timeline-content { background: rgba(255, 253, 252, 0.9); border: 1px solid rgba(201,168,76,0.2); padding: 15px; border-radius: 10px; }
-  .timeline-time { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 5vw, 24px); color: var(--gold-dark); font-weight: 700; margin-bottom: 2px; display: block; }
-  .timeline-text { font-size: clamp(13px, 3.8vw, 15px); color: var(--dark); }
+  .timeline-dot { position: absolute; left: -30px; top: 6px; width: 12px; height: 12px; background: var(--gold-linear); border-radius: 50%; z-index: 3; border: 2px solid #FFFDFC; }
+  .timeline-content { background: rgba(255, 253, 252, 0.9); border: 1px solid rgba(201,168,76,0.15); padding: 16px 20px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
+  .timeline-time { font-family: 'Cormorant Garamond', serif; font-size: clamp(22px, 5vw, 26px); color: var(--gold-dark); font-weight: 600; margin-bottom: 3px; display: block; }
+  .timeline-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(16px, 4vw, 18px); font-style: italic; color: var(--dark); font-weight: 500; }
 
-  /* Календарь */
   .calendar-section { padding: 20px 16px; text-align: center; position: relative; z-index: 2; }
   .wedding-calendar {
-    background: linear-gradient(rgba(255, 253, 252, 0.9), rgba(255, 253, 252, 0.9)), 
+    background: linear-gradient(rgba(255, 253, 252, 0.92), rgba(255, 253, 252, 0.92)), 
                 url('https://images.unsplash.com/photo-1607190074257-dd4b7af0309f?auto=format&fit=crop&q=80&w=400') center/cover no-repeat;
-    border: 1px solid rgba(201,168,76,0.5); border-radius: 16px; padding: 20px 14px; max-width: 320px; margin: 0 auto; box-shadow: 0 10px 30px rgba(61,53,46,0.1);
+    border: 1px solid rgba(201,168,76,0.4); border-radius: 16px; padding: 24px 16px; max-width: 320px; margin: 0 auto; box-shadow: 0 10px 30px rgba(61,53,46,0.06);
   }
-  .calendar-month { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 5vw, 24px); text-transform: uppercase; letter-spacing: 2px; color: var(--gold-dark); margin-bottom: 15px; font-weight: 700; }
-  .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px 2px; font-size: clamp(13px, 3.8vw, 15px); color: var(--text); }
-  .calendar-days-head { font-weight: 600; color: var(--gold-dark); font-size: 11px; text-transform: uppercase; margin-bottom: 4px; }
+  .calendar-month { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(20px, 5vw, 24px); text-transform: lowercase; letter-spacing: 2px; color: var(--gold-dark); margin-bottom: 18px; font-weight: 500; }
+  .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px 2px; font-size: clamp(13px, 3.8vw, 15px); color: var(--text); font-family: 'Jost', sans-serif; }
+  .calendar-days-head { font-weight: 500; color: var(--gold-dark); font-size: 11px; text-transform: uppercase; margin-bottom: 6px; letter-spacing: 1px; }
   .calendar-day { height: 28px; display: flex; align-items: center; justify-content: center; position: relative; }
   .calendar-day.wedding-date { font-weight: 700; color: #FFFDFC !important; z-index: 1; }
   .calendar-day.wedding-date::before {
-    content: ''; position: absolute; width: 30px; height: 30px;
+    content: ''; position: absolute; width: 32px; height: 32px;
     background: url('https://img.icons8.com/color/96/hearts.png') center/contain no-repeat;
     z-index: -1; top: 50%; left: 50%; transform: translate(-50%, -50%);
   }
 
-  /* Локация */
   .location-section { padding: 20px 16px; text-align: center; position: relative; z-index: 2;}
-  .location-card { max-width: 350px; margin: 0 auto; background: rgba(255, 253, 252, 0.95); border: 1px dashed var(--gold-solid); padding: 30px 20px; border-radius: 12px; }
-  .location-icon { width: 32px; height: 32px; margin-bottom: 10px; fill: none; stroke: var(--gold-solid); stroke-width: 1.2; }
-  .location-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 6px; font-weight: 600; }
-  .location-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(26px, 7vw, 32px); color: var(--dark); font-weight: 600; }
-  .location-subtitle { font-size: 13px; color: var(--text-light); font-style: italic; margin-top: 6px;}
+  .location-card { max-width: 350px; margin: 0 auto; background: rgba(255, 253, 252, 0.95); border: 1px dashed var(--gold-solid); padding: 35px 20px; border-radius: 12px; }
+  .location-icon { width: 30px; height: 30px; margin-bottom: 12px; fill: none; stroke: var(--gold-solid); stroke-width: 1.2; }
+  .location-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 8px; font-weight: 600; }
+  .location-title { font-family: 'Playfair Display', serif; font-size: clamp(26px, 7vw, 32px); color: var(--dark); font-weight: 500; }
+  .location-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--text-light); font-style: italic; margin-top: 6px; font-weight: 500; }
 
-  /* Родители жениха */
-  .parents-section { padding: 20px 16px; display: flex; justify-content: center; position: relative; z-index: 2; }
-  .parents-card { background: rgba(254, 251, 246, 0.9); border: 1px double var(--gold-solid); padding: 20px; max-width: 350px; width: 100%; text-align: center; border-radius: 10px; }
-  .parents-role { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-dark); font-weight: 600; margin-bottom: 6px; }
-  .parents-names { font-family: 'Cormorant Garamond', serif; font-size: clamp(22px, 6vw, 26px); font-weight: 600; color: var(--dark); }
+  .parents-role { font-family: 'Playfair Display', serif; font-style: italic; font-size: 14px; color: var(--gold-dark); margin-bottom: 10px; }
+  .parents-names { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(22px, 6vw, 26px); font-weight: 500; color: var(--dark); letter-spacing: 0.5px; }
 
-  /* Форма (RSVP) */
   .rsvp-section { padding: 20px 16px 60px; text-align: center; position: relative; z-index: 2; }
-  .rsvp-inner { max-width: 350px; margin: 0 auto; background: rgba(255, 253, 252, 0.95); border: 1px solid rgba(201,168,76,0.25); padding: 35px 20px; border-radius: 12px; }
-  .rsvp-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 7vw, 34px); color: var(--dark); margin-bottom: 25px; font-weight: 400; }
-  .form-group { margin-bottom: 20px; text-align: left; }
-  .form-label { display: block; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; color: var(--gold-dark); }
-  .form-input { width: 100%; border: none; border-bottom: 1px solid rgba(201,168,76,0.4); background: transparent; padding: 6px 0; outline: none; font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--dark); border-radius: 0; }
-  .attend-toggle { display: flex; gap: 10px; margin-top: 8px; }
+  .rsvp-inner { max-width: 350px; margin: 0 auto; background: rgba(255, 253, 252, 0.95); border: 1px solid rgba(201,168,76,0.2); padding: 40px 20px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
+  .rsvp-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(22px, 6.5vw, 26px); color: var(--dark); margin-bottom: 28px; font-weight: 500; line-height: 1.3; }
+  .form-group { margin-bottom: 22px; text-align: left; }
+  .form-label { display: block; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; font-weight: 500; color: var(--gold-dark); }
+  .form-input { width: 100%; border: none; border-bottom: 1px solid rgba(201,168,76,0.35); background: transparent; padding: 6px 0; outline: none; font-family: 'Cormorant Garamond', serif; font-size: 21px; font-style: italic; color: var(--dark); border-radius: 0; transition: border-color 0.3s ease; }
+  .form-input:focus { border-color: var(--gold-dark); }
+  .attend-toggle { display: flex; gap: 10px; margin-top: 10px; }
   .attend-opt { flex: 1; }
   .attend-opt input[type="radio"] { display: none; }
-  .attend-opt label { display: flex; align-items: center; justify-content: center; border: 1px solid rgba(201,168,76,0.3); padding: 12px; cursor: pointer; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; border-radius: 6px; background: #fff; font-weight: 500; -webkit-tap-highlight-color: transparent; }
+  .attend-opt label { display: flex; align-items: center; justify-content: center; border: 1px solid rgba(201,168,76,0.25); padding: 12px; cursor: pointer; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; border-radius: 8px; background: #fff; font-weight: 500; -webkit-tap-highlight-color: transparent; transition: all 0.25s ease; }
   .attend-opt input:checked + label { background: var(--dark); color: #FFFDFC; border-color: var(--dark); }
-  .submit-btn { width: 100%; padding: 16px; background: var(--dark); color: #fff; border: none; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; margin-top: 15px; border-radius: 6px; font-weight: 500; -webkit-tap-highlight-color: transparent; }
+  .submit-btn { width: 100%; padding: 16px; background: var(--dark); color: #fff; border: none; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; margin-top: 15px; border-radius: 8px; font-weight: 500; -webkit-tap-highlight-color: transparent; transition: background 0.3s ease; }
+  .submit-btn:hover { background: #2d2722; }
 
-  /* Футер */
-  footer { background: #1A1613; text-align: center; padding: 35px 16px; color: rgba(250,246,238,0.4); border-top: 1px solid rgba(201,168,76,0.15); position: relative; z-index: 2;}
-  .footer-names { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; color: #FAF5EB; }
-  .credits-phone { display: inline-block; font-size: 15px; color: #F5E5C0; text-decoration: none; font-weight: 500; border-bottom: 1px dashed rgba(245,229,192,0.4); padding-bottom: 2px; margin-top: 4px;}
+  footer { background: #1A1613; text-align: center; padding: 40px 16px; color: rgba(250,246,238,0.35); border-top: 1px solid rgba(201,168,76,0.12); position: relative; z-index: 2;}
+  .footer-names { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; color: #FAF5EB; font-weight: 400; }
+  .credits-phone { display: inline-block; font-size: 15px; color: #F5E5C0; text-decoration: none; font-weight: 500; border-bottom: 1px dashed rgba(245,229,192,0.3); padding-bottom: 2px; margin-top: 4px;}
 </style>
 </head>
 <body id="body">
@@ -255,8 +242,8 @@
         <div class="letter">
           <h3 class="letter-title" data-ru>Дорогие гости!</h3>
           <h3 class="letter-title" data-tt style="display:none">Кадерле кунаклар!</h3>
-          <p class="letter-p" data-ru>Разделите с нами этот особенный день.<br>Будем рады видеть вас!</p>
-          <p class="letter-p" data-tt style="display:none">Бу зур бәйрәмне бергә үткәрегез.<br>Шат булырбыз!</p>
+          <p class="letter-p" data-ru>Спешим поделиться самым важным событием в нашей жизни — днем создания нашей семьи. Мы будем искренне рады видеть вас среди наших гостей, чтобы разделить с нами эту радость!</p>
+          <p class="letter-p" data-tt style="display:none">Тормышыбыздагы иң мөһим вакыйга — гаиләбез туган көн белән уртаклашырга ашыгабыз. Бу шатлыкны бергә бүлешү өчен сезне кунакларыбыз арасында күрүебезгә чын күңелдән шат булырбыз!</p>
         </div>
         <div class="envelope-bottom"></div>
       </div>
@@ -266,9 +253,9 @@
   </div>
 </section>
 
-<div class="section-divider"><div class="divider-center"><div class="divider-dot"></div><div class="divider-diamond"></div><div class="divider-dot"></div></div></div>
+<div class="section-divider fade-in-section"><div class="divider-center"><div class="divider-dot"></div><div class="divider-diamond"></div><div class="divider-dot"></div></div></div>
 
-<section class="timer-section">
+<section class="timer-section fade-in-section">
   <div class="timer-title" data-ru>До свадьбы осталось:</div>
   <div class="timer-title" data-tt style="display:none">Туйга кадәр калды:</div>
   <div class="timer-container">
@@ -278,9 +265,9 @@
   </div>
 </section>
 
-<div class="section-divider"><div class="divider-center"><div class="divider-dot"></div><div class="divider-diamond"></div><div class="divider-dot"></div></div></div>
+<div class="section-divider fade-in-section"><div class="divider-center"><div class="divider-dot"></div><div class="divider-diamond"></div><div class="divider-dot"></div></div></div>
 
-<section class="poem-section">
+<section class="poem-section fade-in-section">
   <div class="poem-card">
     <div class="poem-text" data-ru>
       В переплетении судеб и дорог,<br>Мы отыскали истинное счастье.<br>Переступив любви живой порог,<br>Мы обещаем больше не расстаться.<br><br>
@@ -293,9 +280,9 @@
   </div>
 </section>
 
-<div class="section-divider"><div class="divider-center"><div class="divider-dot"></div><div class="divider-diamond"></div><div class="divider-dot"></div></div></div>
+<div class="section-divider fade-in-section"><div class="divider-center"><div class="divider-dot"></div><div class="divider-diamond"></div><div class="divider-dot"></div></div></div>
 
-<section class="timeline-section">
+<section class="timeline-section fade-in-section">
   <h2 class="timeline-title"><span class="deco-bow"></span><br><span data-ru>Программа дня</span><span data-tt style="display:none">Көн тәртибе</span></h2>
   <div class="timeline-container">
     <div class="timeline-path"></div>
@@ -334,9 +321,9 @@
   </div>
 </section>
 
-<div class="section-divider"><div class="divider-center"><div class="divider-dot"></div><div class="divider-diamond"></div><div class="divider-dot"></div></div></div>
+<div class="section-divider fade-in-section"><div class="divider-center"><div class="divider-dot"></div><div class="divider-diamond"></div><div class="divider-dot"></div></div></div>
 
-<section class="calendar-section">
+<section class="calendar-section fade-in-section">
   <div class="wedding-calendar">
     <div class="calendar-month">Август 2026</div>
     <div class="calendar-grid">
@@ -351,9 +338,9 @@
   </div>
 </section>
 
-<div class="section-divider"><div class="divider-center"><div class="divider-dot"></div><div class="divider-diamond"></div><div class="divider-dot"></div></div></div>
+<div class="section-divider fade-in-section"><div class="divider-center"><div class="divider-dot"></div><div class="divider-diamond"></div><div class="divider-dot"></div></div></div>
 
-<section class="location-section">
+<section class="location-section fade-in-section">
   <div class="location-card">
     <svg class="location-icon" viewBox="0 0 24 24">
       <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path>
@@ -367,9 +354,9 @@
   </div>
 </section>
 
-<div class="section-divider"><div class="divider-center"><div class="divider-dot"></div><div class="divider-diamond"></div><div class="divider-dot"></div></div></div>
+<div class="section-divider fade-in-section"><div class="divider-center"><div class="divider-dot"></div><div class="divider-diamond"></div><div class="divider-dot"></div></div></div>
 
-<section class="parents-section">
+<section class="parents-section fade-in-section">
   <div class="parents-card">
     <p class="parents-role" data-ru>С уважением, родители жениха:</p>
     <p class="parents-role" data-tt style="display:none">Ихтирам белән, кияүнең әти-әнисе:</p>
@@ -377,11 +364,15 @@
   </div>
 </section>
 
-<div class="section-divider"><div class="divider-center"><div class="divider-dot"></div><div class="divider-diamond"></div><div class="divider-dot"></div></div></div>
+<div class="section-divider fade-in-section"><div class="divider-center"><div class="divider-dot"></div><div class="divider-diamond"></div><div class="divider-dot"></div></div></div>
 
-<section class="rsvp-section">
+<section class="rsvp-section fade-in-section">
   <div class="rsvp-inner">
-    <h2 class="rsvp-title"><span class="deco-heart"></span><br><span data-ru>Подтверждение</span><span data-tt style="display:none">Раслау</span></h2>
+    <div class="animated-heart"></div>
+    <h2 class="rsvp-title">
+      <span data-ru>Подтвердите свое присутствие</span>
+      <span data-tt style="display:none">Катнашуыгызны раслагыз</span>
+    </h2>
     <div class="form-group">
       <label class="form-label" data-ru>Ваше имя</label>
       <label class="form-label" data-tt style="display:none">Сезнең исемегез</label>
@@ -402,7 +393,7 @@
 
 <footer>
   <p class="footer-names">Руслан & Розалия • 2026</p>
-  <p style="font-size: 13px; margin-bottom: 5px; color: rgba(250,245,235,0.6);">По вопросам приглашений:</p>
+  <p style="font-size: 13px; margin-bottom: 5px; color: rgba(250,245,235,0.5);">По вопросам приглашений:</p>
   <a href="tel:0559150809" class="credits-phone">0559150809</a>
 </footer>
 
@@ -449,7 +440,24 @@
     window.open(`https://wa.me/996559150809?text=${encodeURIComponent(msg)}`, '_blank');
   }
 
-  // Оптимизированная отрисовка лепестков (не тормозит на смартфонах)
+  // Скрипт плавного появления элементов при прокрутке
+  document.addEventListener("DOMContentLoaded", function() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, {
+      threshold: 0.12, // Элемент начнет проявляться, когда покажется на 12%
+      rootMargin: "0px 0px -40px 0px"
+    });
+
+    document.querySelectorAll('.fade-in-section').forEach(section => {
+      observer.observe(section);
+    });
+  });
+
   const canvas = document.getElementById('petalCanvas');
   const ctx = canvas.getContext('2d');
   let petals = [];
