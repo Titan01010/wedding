@@ -65,7 +65,6 @@
 
   .petal-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
 
-  /* ИСПРАВЛЕНО: Панель языка больше не перекрывает левую часть экрана */
   .lang-bar {
     position: fixed; 
     top: 0; 
@@ -82,12 +81,11 @@
   .lang-btn:last-child  { border-radius: 0 4px 4px 0; }
   .lang-btn.active, .lang-btn:hover { background: var(--gold-linear); color: var(--dark); border-color: var(--gold-solid); font-weight: 500; }
 
-  /* ИСПРАВЛЕНО: Кнопка музыки вынесена на самый верхний слой */
   .music-container {
     position: fixed;
     top: 12px;
     left: 14px;
-    z-index: 9999;
+    z-index: 99999;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -107,7 +105,7 @@
     justify-content: center;
     gap: 3px;
     padding: 0 6px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.15);
     transition: all 0.3s ease;
     -webkit-tap-highlight-color: transparent;
     pointer-events: auto;
@@ -136,14 +134,14 @@
   }
 
   .music-hint {
-    background: rgba(30, 26, 23, 0.85);
+    background: rgba(30, 26, 23, 0.9);
     color: #FFFDFC;
     font-size: 10px;
     padding: 5px 8px;
     border-radius: 4px;
     white-space: nowrap;
     letter-spacing: 0.5px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     animation: pulseHint 2s infinite ease-in-out;
     display: flex;
     align-items: center;
@@ -304,7 +302,7 @@
 </head>
 <body id="body" class="lang-ru">
 
-<audio id="weddingMusic" src="music.mp3" loop preload="auto"></audio>
+<audio id="weddingMusic" src="music.mp3?v=3" loop preload="auto"></audio>
 
 <div class="music-container">
   <button class="music-btn" id="musicBtn" onclick="toggleMusic()" aria-label="Воспроизвести музыку">
@@ -384,7 +382,7 @@
       Пусть этот день запомнится в сердцах,<br>Улыбкой близких, нежностью букетов.<br>Мы пишем повесть с блеском на глазах,<br>И приглашаем вас стать частью этой.
     </div>
     <div class="poem-text" data-tt>
-      Тормыш сукмаклары бергә үрелде,<br>Без таптык парлы бәхет ачкычын.<br>Мәхәббәтнего зур капкасы ачылды,<br>Ишеттек йөрәкнең назлы тавышын.<br><br>
+      Тормыш сукмаклары бергә үрелде,<br>Без таптык парлы бәхет ачкычын.<br>Мәхәббәтнең зур капкасы ачылды,<br>Ишеттек йөрәкнең назлы тавышын.<br><br>
       Бу күркәм көн мәңге хәтердә калсын,<br>Янәшәдә булсын кадерле дуслар.<br>Бәхетле тарихны бергәләп языйк,<br>Нур чәчсен без янган якты йолдызлар.
     </div>
   </div>
@@ -518,8 +516,11 @@
 <script>
   let currentLang = 'ru';
 
-  function toggleEnvelope() { document.getElementById('envelopeWrapper').classList.toggle('open'); }
+  function toggleEnvelope() { 
+    document.getElementById('envelopeWrapper').classList.toggle('open'); 
+  }
 
+  // Скрипт клика теперь СНАЧАЛА включает анимацию, а затем пробует играть трек
   function toggleMusic() {
     const audio = document.getElementById('weddingMusic');
     const btn = document.getElementById('musicBtn');
@@ -528,15 +529,19 @@
     if (hint) hint.style.display = 'none';
 
     if (audio.paused) {
-      audio.play().then(() => {
-        btn.classList.add('playing');
-      }).catch(() => {
+      // Принудительно ставим класс визуально в первую очередь
+      btn.classList.add('playing');
+      
+      audio.play().catch(function(error) {
+        console.log("Браузер ограничил автозапуск, пробуем мягкую перезагрузку...");
         audio.load();
-        setTimeout(() => {
-          audio.play().then(() => {
-            btn.classList.add('playing');
-          }).catch(e => console.log("Блокировка аудио браузером."));
-        }, 80);
+        setTimeout(function() {
+          audio.play().catch(function(e) {
+            // Если трек физически не найден на гитхабе, возвращаем кнопку в покой
+            btn.classList.remove('playing');
+            console.log("Файл не найден или заблокирован:", e);
+          });
+        }, 50);
       });
     } else {
       audio.pause();
@@ -568,9 +573,9 @@
 
   function sendResponse() {
     const name = document.getElementById('guestName').value.trim();
-    const att = document.querySelector('input[name="attend"]:checked').value;
     if(!name) { alert(currentLang === 'ru' ? 'Введите имя' : 'Исемегезне языгыз'); return; }
     
+    const att = document.querySelector('input[name="attend"]:checked').value;
     let status = '';
     if(currentLang === 'ru') {
       status = att === 'yes' ? 'Да, я приду!' : 'К сожалению, не смогу.';
@@ -583,15 +588,15 @@
   }
 
   document.addEventListener("DOMContentLoaded", function() {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
         }
       });
     }, { threshold: 0.08 });
 
-    document.querySelectorAll('.fade-in-section').forEach(section => {
+    document.querySelectorAll('.fade-in-section').forEach(function(section) {
       observer.observe(section);
     });
   });
@@ -611,7 +616,7 @@
   for (let i = 0; i < 18; i++) petals.push(new Petal());
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    petals.forEach(p => { p.update(); p.draw(); });
+    petals.forEach(function(p) { p.update(); p.draw(); });
     requestAnimationFrame(animate);
   }
   animate();
