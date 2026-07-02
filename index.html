@@ -230,7 +230,11 @@
   .location-icon { width: 28px; height: 28px; margin-bottom: 8px; fill: none; stroke: var(--gold-solid); stroke-width: 1.5; }
   .location-label { font-size: 11px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 4px; font-weight: 600; }
   .location-title { font-family: 'Playfair Display', serif; font-size: clamp(23px, 6.5vw, 28px); color: var(--dark); font-weight: 500; }
-  .location-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 14.5px; color: var(--text-light); font-style: italic; margin-top: 3px; }
+  .location-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: var(--text-light); font-style: italic; margin-top: 3px; margin-bottom: 8px; }
+  .location-address { font-size: 13.5px; color: var(--dark); letter-spacing: 0.5px; font-weight: 400; margin-bottom: 18px; }
+  
+  .map-btn { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; background: var(--dark); color: #FFFDFC; font-size: 10.5px; letter-spacing: 1.5px; text-transform: uppercase; padding: 11px 22px; border-radius: 8px; font-weight: 500; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.1); -webkit-tap-highlight-color: transparent; }
+  .map-btn:hover, .map-btn:active { background: var(--gold-solid); color: var(--dark); }
 
   .rsvp-inner { max-width: 335px; margin: 0 auto; background: rgba(255, 253, 252, 0.95); border: 2px solid rgba(201,168,76,0.38); padding: 30px 16px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
   .rsvp-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(19px, 6vw, 23px); color: var(--dark); margin-bottom: 20px; font-weight: 500; line-height: 1.25; }
@@ -389,8 +393,14 @@
     <p class="location-label" data-ru>Место проведения</p>
     <p class="location-label" data-tt>Үткәрү урыны</p>
     <h3 class="location-title">Merry Garden</h3>
-    <p class="location-subtitle" data-ru>Ресторанный комплекс</p>
-    <p class="location-subtitle" data-tt>Банкет залы</p>
+    <p class="location-subtitle" data-ru>Ресторанный комплекс • г. Ош</p>
+    <p class="location-subtitle" data-tt>Банкет залы • Ош ш.</p>
+    <p class="location-address">ул. Нурматова, 82/9</p>
+    
+    <a href="https://www.google.com/maps/search/?api=1&query=%D0%BD%D1%83%D1%80%D0%BC%D0%B0%D1%82%D0%BE%D0%B2%D0%B0+82%2F9+%D0%BE%D1%88" target="_blank" class="map-btn">
+      <span data-ru>Открыть карту</span>
+      <span data-tt>Картаны ачарга</span>
+    </a>
   </div>
 </section>
 
