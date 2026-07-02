@@ -20,13 +20,13 @@
   }
 
   html { scroll-behavior: smooth; }
-  
-  body { 
+
+  body {
     background: var(--bg-gradient);
     background-image: var(--bg-texture);
-    font-family: 'Jost', sans-serif; 
-    color: var(--text); 
-    overflow-x: hidden; 
+    font-family: 'Jost', sans-serif;
+    color: var(--text);
+    overflow-x: hidden;
     position: relative;
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
@@ -66,13 +66,13 @@
   .petal-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
 
   .lang-bar {
-    position: fixed; 
-    top: 0; 
-    right: 0; 
+    position: fixed;
+    top: 0;
+    right: 0;
     left: auto;
-    z-index: 100; 
-    display: flex; 
-    justify-content: flex-end; 
+    z-index: 100;
+    display: flex;
+    justify-content: flex-end;
     padding: 12px 14px;
     background: transparent;
   }
@@ -128,6 +128,13 @@
   .music-btn.playing .bar:nth-child(3) { animation-delay: 0.2s; height: 14px; }
   .music-btn.playing .bar:nth-child(4) { animation-delay: 0.5s; }
 
+  .music-btn.error {
+    border-color: rgba(188, 70, 70, 0.6);
+  }
+  .music-btn.error .bar {
+    background-color: rgba(188, 70, 70, 0.8);
+  }
+
   @keyframes bounce {
     0% { transform: scaleY(0.4); }
     100% { transform: scaleY(1.3); }
@@ -148,7 +155,7 @@
     gap: 4px;
     font-weight: 400;
   }
-  
+
   .music-hint span { font-size: 11px; line-height: 1; }
 
   @keyframes pulseHint {
@@ -158,19 +165,19 @@
 
   .hero {
     min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 90px 16px 30px; position: relative;
-    background: linear-gradient(rgba(30, 26, 23, 0.45), rgba(30, 26, 23, 0.55)), 
+    background: linear-gradient(rgba(30, 26, 23, 0.45), rgba(30, 26, 23, 0.55)),
                 url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&q=80&w=1200') center/cover no-repeat;
   }
-  
+
   .wedding-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(14px, 4.5vw, 18px); letter-spacing: 3px; color: #FFFDFC; margin-bottom: 12px; text-shadow: 0 2px 8px rgba(0,0,0,0.4); text-transform: lowercase; }
-  
-  .hero-names { 
-    font-family: 'Playfair Display', serif; 
-    font-weight: 600; 
-    font-size: clamp(42px, 12vw, 85px); 
-    line-height: 1.1; 
-    color: #FFFDFC; 
-    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); 
+
+  .hero-names {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: clamp(42px, 12vw, 85px);
+    line-height: 1.1;
+    color: #FFFDFC;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
     margin-bottom: 25px;
     display: flex;
     flex-direction: column;
@@ -189,20 +196,20 @@
   .envelope-side-right { position: absolute; inset: 0; background: #e6dac2; clip-path: polygon(100% 0, 100% 100%, 50% 50%); z-index: 4; }
   .envelope-bottom { position: absolute; inset: 0; background: #decba0; clip-path: polygon(0 100%, 50% 45%, 100% 100%); z-index: 5; }
   .envelope-flap { position: absolute; inset: 0; background: #dccaaf; clip-path: polygon(0 0, 100% 0, 50% 46%); transform-origin: top; z-index: 6; transition: transform 0.6s ease-in-out; }
-  
+
   .envelope-seal { position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); width: 50px; height: 50px; background: radial-gradient(circle at 35% 35%, #FFF2CC 0%, #D4AF37 50%, #A37F10 100%); border-radius: 50%; z-index: 7; display: flex; align-items: center; justify-content: center; color: #4A3500; font-size: 13px; font-family: 'Cormorant Garamond', serif; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.4); border: 1px solid #B38E36; }
   .envelope-seal::after { content: ''; position: absolute; width: 100%; height: 100%; border: 2px solid #F5E5C0; border-radius: 50%; animation: goldPulse 2.2s infinite ease-in-out; pointer-events: none; }
-  
+
   .click-hint { margin-top: 15px; font-size: 11px; color: #FFFDFC; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
 
-  .letter { 
-    position: absolute; inset: 6px 10px; background: #FFFDFC url('https://www.transparenttextures.com/patterns/soft-wallpaper.png'); 
-    border-radius: 4px; padding: 10px 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 2; border: 1px solid #D4AF37; 
-    transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; 
+  .letter {
+    position: absolute; inset: 6px 10px; background: #FFFDFC url('https://www.transparenttextures.com/patterns/soft-wallpaper.png');
+    border-radius: 4px; padding: 10px 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 2; border: 1px solid #D4AF37;
+    transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
   }
   .letter-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(15px, 4.2vw, 19px); color: var(--dark); margin-bottom: 4px; font-weight: 600; }
   .letter-p { color: var(--text-light); font-family: 'Cormorant Garamond', serif; font-size: clamp(13px, 3.8vw, 15px); font-style: italic; line-height: 1.4; font-weight: 500; }
-  
+
   .envelope-wrapper.open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
   .envelope-wrapper.open .envelope-seal { opacity: 0; transform: translate(-50%, -50%) scale(0.5); pointer-events: none; }
   .envelope-wrapper.open .letter { transform: translateY(-64%); z-index: 8; box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
@@ -225,9 +232,9 @@
   }
 
   .parents-section { padding: 15px 16px; display: flex; justify-content: center; position: relative; z-index: 2; }
-  .parents-card { 
-    background: rgba(254, 251, 246, 0.95); 
-    padding: 30px 20px; max-width: 350px; width: 100%; text-align: center; 
+  .parents-card {
+    background: rgba(254, 251, 246, 0.95);
+    padding: 30px 20px; max-width: 350px; width: 100%; text-align: center;
     position: relative; box-shadow: 0 10px 25px rgba(201,168,76,0.06);
     border: 10px solid transparent;
     border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M0,0 L60,0 L60,60 L0,60 Z' fill='none'/%3E%3Cpath d='M8,8 Q30,1 52,8 Q59,30 52,52 Q30,59 8,52 Q1,30 8,8' fill='none' stroke='%23C9A84C' stroke-width='1.5' stroke-dasharray='3 3'/%3E%3Cpath d='M5,5 Q30,-3 55,5 Q63,30 55,55 Q30,63 5,55 Q-3,30 5,5' fill='none' stroke='%238A6D25' stroke-width='1'/%3E%3C/svg%3E") 15 round;
@@ -257,7 +264,7 @@
 
   .calendar-section { padding: 15px 16px; text-align: center; position: relative; z-index: 2; }
   .wedding-calendar {
-    background: linear-gradient(rgba(255, 253, 252, 0.92), rgba(255, 253, 252, 0.92)), 
+    background: linear-gradient(rgba(255, 253, 252, 0.92), rgba(255, 253, 252, 0.92)),
                 url('https://images.unsplash.com/photo-1607190074257-dd4b7af0309f?auto=format&fit=crop&q=80&w=400') center/cover no-repeat;
     border: 1px solid rgba(201,168,76,0.4); border-radius: 16px; padding: 22px 14px; max-width: 310px; margin: 0 auto;
   }
@@ -302,7 +309,9 @@
 </head>
 <body id="body" class="lang-ru">
 
-<audio id="weddingMusic" src="music.mp3?v=3" loop preload="auto"></audio>
+<audio id="weddingMusic" preload="auto" loop>
+  <source src="music.mp3" type="audio/mpeg" />
+</audio>
 
 <div class="music-container">
   <button class="music-btn" id="musicBtn" onclick="toggleMusic()" aria-label="Воспроизвести музыку">
@@ -333,13 +342,13 @@
 <section class="hero">
   <p class="wedding-title" data-ru>Приглашение на свадьбу</p>
   <p class="wedding-title" data-tt>Туйга чакыру</p>
-  
+
   <h1 class="hero-names">
     <em>Руслан</em>
     <span class="hero-ampersand">&amp;</span>
     <em>Розалия</em>
   </h1>
-  
+
   <div class="envelope-container">
     <div class="envelope-wrapper" id="envelopeWrapper">
       <div class="envelope" onclick="toggleEnvelope()">
@@ -516,41 +525,82 @@
 <script>
   let currentLang = 'ru';
 
-  function toggleEnvelope() { 
-    document.getElementById('envelopeWrapper').classList.toggle('open'); 
+  function toggleEnvelope() {
+    document.getElementById('envelopeWrapper').classList.toggle('open');
   }
 
-  // Скрипт клика теперь СНАЧАЛА включает анимацию, а затем пробует играть трек
+  const audioEl = document.getElementById('weddingMusic');
+  const musicBtnEl = document.getElementById('musicBtn');
+
+  // Явно выставляем громкость и снимаем mute на случай, если это было
+  // установлено где-то ещё (например, настройками браузера по умолчанию).
+  audioEl.volume = 1;
+  audioEl.muted = false;
+
+  // Диагностика для консоли: как только браузер понял, сколько длится
+  // файл и что он валиден, покажем длительность и громкость.
+  // duration = NaN или 0 обычно означает, что файл пустой/битый.
+  audioEl.addEventListener('loadedmetadata', function () {
+    console.log('music.mp3 загружен. Длительность (сек):', audioEl.duration, 'громкость:', audioEl.volume, 'muted:', audioEl.muted);
+  });
+
+  // Открыть в консоли: weddingAudio.duration, weddingAudio.volume и т.д.
+  window.weddingAudio = audioEl;
+
+  // Диагностика: если файл music.mp3 не найден рядом с этой HTML-страницей
+  // (не загружен на хостинг, не в той папке, либо не совпадает регистр имени),
+  // браузер сгенерирует событие "error" — покажем это явно в консоли и подсветим кнопку.
+  audioEl.addEventListener('error', function () {
+    musicBtnEl.classList.remove('playing');
+    musicBtnEl.classList.add('error');
+    musicBtnEl.title = 'Файл music.mp3 не найден рядом с этой страницей. Проверьте, что он загружен в ту же папку и называется именно "music.mp3" (с учётом регистра).';
+    console.error('Аудиофайл music.mp3 не загрузился. Убедитесь, что он лежит в той же папке, что и index.html, и имя написано точно строчными буквами.');
+  });
+
+  // Защита от гонки: пока предыдущий play()/pause() не завершился,
+  // игнорируем повторные клики — именно повторный вызов pause() поверх
+  // ещё не выполнившегося play() и порождает AbortError.
+  let audioBusy = false;
+
   function toggleMusic() {
-    const audio = document.getElementById('weddingMusic');
-    const btn = document.getElementById('musicBtn');
+    if (audioBusy) return;
+
     const hint = document.getElementById('musicHint');
-    
     if (hint) hint.style.display = 'none';
 
-    if (audio.paused) {
-      // Принудительно ставим класс визуально в первую очередь
-      btn.classList.add('playing');
-      
-      audio.play().catch(function(error) {
-        console.log("Браузер ограничил автозапуск, пробуем мягкую перезагрузку...");
-        audio.load();
-        setTimeout(function() {
-          audio.play().catch(function(e) {
-            // Если трек физически не найден на гитхабе, возвращаем кнопку в покой
-            btn.classList.remove('playing');
-            console.log("Файл не найден или заблокирован:", e);
-          });
-        }, 50);
-      });
+    if (audioEl.paused) {
+      musicBtnEl.classList.add('playing');
+      musicBtnEl.classList.remove('error');
+      audioBusy = true;
+
+      const playPromise = audioEl.play();
+      if (playPromise !== undefined) {
+        playPromise.then(function () {
+          audioBusy = false;
+        }).catch(function (error) {
+          audioBusy = false;
+          if (error.name === 'AbortError') {
+            // play() был прерван последующим pause() — это не настоящая
+            // ошибка (обычно из-за двойного клика), ничего не делаем.
+            return;
+          }
+          musicBtnEl.classList.remove('playing');
+          musicBtnEl.classList.add('error');
+          musicBtnEl.title = 'Файл music.mp3 не найден рядом с этой страницей. Проверьте, что он загружен в ту же папку и называется именно "music.mp3" (с учётом регистра).';
+          console.error('Не удалось воспроизвести music.mp3:', error);
+        });
+      } else {
+        audioBusy = false;
+      }
     } else {
-      audio.pause();
-      btn.classList.remove('playing');
+      audioEl.pause();
+      musicBtnEl.classList.remove('playing');
+      audioBusy = false;
     }
   }
 
   function updateTimer() {
-    const targetDate = new Date(2026, 7, 8, 16, 0, 0).getTime(); 
+    const targetDate = new Date(2026, 7, 8, 16, 0, 0).getTime();
     const now = new Date().getTime();
     const diff = targetDate - now;
 
@@ -574,7 +624,7 @@
   function sendResponse() {
     const name = document.getElementById('guestName').value.trim();
     if(!name) { alert(currentLang === 'ru' ? 'Введите имя' : 'Исемегезне языгыз'); return; }
-    
+
     const att = document.querySelector('input[name="attend"]:checked').value;
     let status = '';
     if(currentLang === 'ru') {
@@ -582,7 +632,7 @@
     } else {
       status = att === 'yes' ? 'Әйе, мин киләм!' : 'Кызганычка каршы, килә алмыйм.';
     }
-    
+
     const msg = `Приглашение Руслан & Розалия\nИмя: ${name}\nОтвет: ${status}`;
     window.open(`https://wa.me/996559150809?text=${encodeURIComponent(msg)}`, '_blank');
   }
@@ -607,7 +657,7 @@
   function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
   window.addEventListener('resize', resize);
   resize();
-  
+
   class Petal {
     constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * -canvas.height; this.size = Math.random() * 4 + 5; this.speedY = Math.random() * 0.6 + 0.4; this.angle = Math.random() * 360; this.spin = Math.random() * 0.2 - 0.1; }
     draw() { ctx.save(); ctx.translate(this.x, this.y); ctx.rotate((this.angle * Math.PI) / 180); ctx.beginPath(); ctx.ellipse(0, 0, this.size, this.size * 0.7, 0, 0, Math.PI * 2); ctx.fillStyle = "rgba(188, 118, 104, 0.35)"; ctx.fill(); ctx.restore(); }
@@ -626,11 +676,11 @@
     const body = document.getElementById('body');
     if (lang === 'tt') {
       body.className = "lang-tt";
-      document.getElementById('btn-tt').classList.add('active'); 
+      document.getElementById('btn-tt').classList.add('active');
       document.getElementById('btn-ru').classList.remove('active');
     } else {
       body.className = "lang-ru";
-      document.getElementById('btn-ru').classList.add('active'); 
+      document.getElementById('btn-ru').classList.add('active');
       document.getElementById('btn-tt').classList.remove('active');
     }
   }
