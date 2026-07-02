@@ -37,8 +37,8 @@
 
   .fade-in-section {
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 1s cubic-bezier(0.215, 0.610, 0.355, 1), transform 1s cubic-bezier(0.215, 0.610, 0.355, 1);
+    transform: translateY(25px);
+    transition: opacity 0.9s cubic-bezier(0.215, 0.610, 0.355, 1), transform 0.9s cubic-bezier(0.215, 0.610, 0.355, 1);
     will-change: transform, opacity;
   }
 
@@ -48,20 +48,20 @@
   }
 
   .bg-blur {
-    position: absolute; border-radius: 50%; mix-blend-mode: multiply; filter: blur(60px); opacity: 0.18; z-index: 0; pointer-events: none;
+    position: absolute; border-radius: 50%; mix-blend-mode: multiply; filter: blur(60px); opacity: 0.16; z-index: 0; pointer-events: none;
   }
   .blur-1 { top: 15%; left: -50px; width: 250px; height: 250px; background: #EADBC8; }
   .blur-2 { top: 35%; right: -50px; width: 280px; height: 280px; background: #E2C792; }
   .blur-3 { top: 55%; left: -30px; width: 220px; height: 220px; background: #FFF2CC; }
   .blur-4 { top: 75%; right: -30px; width: 260px; height: 260px; background: #BC7668; }
 
-  .section-divider { display: flex; justify-content: center; align-items: center; margin: 35px auto; max-width: 80%; position: relative; z-index: 2; }
+  .section-divider { display: flex; justify-content: center; align-items: center; margin: 28px auto; max-width: 75%; position: relative; z-index: 2; }
   .section-divider::before, .section-divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to var(--direction, right), transparent, var(--gold-solid)); }
   .section-divider::before { --direction: right; }
   .section-divider::after { --direction: left; }
-  .divider-center { display: flex; align-items: center; gap: 6px; margin: 0 12px; }
-  .divider-diamond { width: 8px; height: 8px; background: var(--gold-solid); transform: rotate(45deg); }
-  .divider-dot { width: 4px; height: 4px; background: var(--gold-solid); border-radius: 50%; }
+  .divider-center { display: flex; align-items: center; gap: 5px; margin: 0 10px; }
+  .divider-diamond { width: 7px; height: 7px; background: var(--gold-solid); transform: rotate(45deg); }
+  .divider-dot { width: 3.5px; height: 3.5px; background: var(--gold-solid); border-radius: 50%; }
 
   .petal-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
 
@@ -69,14 +69,12 @@
     position: fixed;
     top: 0;
     right: 0;
-    left: auto;
     z-index: 100;
     display: flex;
     justify-content: flex-end;
     padding: 12px 14px;
-    background: transparent;
   }
-  .lang-btn { background: rgba(251, 248, 243, 0.9); border: 1px solid rgba(201,168,76,0.3); color: var(--text); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; padding: 6px 16px; cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
+  .lang-btn { background: rgba(251, 248, 243, 0.95); border: 1px solid rgba(201,168,76,0.3); color: var(--text); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; padding: 6px 14px; cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
   .lang-btn:first-child { border-radius: 4px 0 0 4px; }
   .lang-btn:last-child  { border-radius: 0 4px 4px 0; }
   .lang-btn.active, .lang-btn:hover { background: var(--gold-linear); color: var(--dark); border-color: var(--gold-solid); font-weight: 500; }
@@ -94,10 +92,10 @@
   }
 
   .music-btn {
-    width: 38px;
-    height: 38px;
+    width: 42px;
+    height: 42px;
     background: rgba(251, 248, 243, 0.95);
-    border: 1px solid rgba(201,168,76,0.5);
+    border: 1px solid rgba(201,168,76,0.6);
     border-radius: 50%;
     cursor: pointer;
     display: flex;
@@ -105,35 +103,33 @@
     justify-content: center;
     gap: 3px;
     padding: 0 6px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 15px rgba(201,168,76,0.3);
     transition: all 0.3s ease;
     -webkit-tap-highlight-color: transparent;
     pointer-events: auto;
+    animation: goldPulseBtn 2.2s infinite ease-in-out;
+  }
+
+  @keyframes goldPulseBtn {
+    0%, 100% { transform: scale(1); box-shadow: 0 4px 12px rgba(0,0,0,0.12), 0 0 0 0px rgba(201,168,76,0.4); }
+    50% { transform: scale(1.05); box-shadow: 0 4px 18px rgba(0,0,0,0.18), 0 0 10px 4px rgba(201,168,76,0.35); }
   }
 
   .music-btn .bar {
     display: inline-block;
     width: 3px;
-    height: 12px;
+    height: 13px;
     background-color: var(--gold-dark);
     border-radius: 2px;
-    transition: height 0.2s ease;
   }
 
   .music-btn.playing .bar {
     animation: bounce 0.8s ease-in-out infinite alternate;
   }
   .music-btn.playing .bar:nth-child(1) { animation-delay: 0.1s; }
-  .music-btn.playing .bar:nth-child(2) { animation-delay: 0.4s; height: 18px; }
-  .music-btn.playing .bar:nth-child(3) { animation-delay: 0.2s; height: 14px; }
+  .music-btn.playing .bar:nth-child(2) { animation-delay: 0.4s; height: 19px; }
+  .music-btn.playing .bar:nth-child(3) { animation-delay: 0.2s; height: 15px; }
   .music-btn.playing .bar:nth-child(4) { animation-delay: 0.5s; }
-
-  .music-btn.error {
-    border-color: rgba(188, 70, 70, 0.6);
-  }
-  .music-btn.error .bar {
-    background-color: rgba(188, 70, 70, 0.8);
-  }
 
   @keyframes bounce {
     0% { transform: scaleY(0.4); }
@@ -141,30 +137,28 @@
   }
 
   .music-hint {
-    background: rgba(30, 26, 23, 0.9);
-    color: #FFFDFC;
+    background: #C9A84C !important;
+    color: #1E1A17 !important;
     font-size: 10px;
-    padding: 5px 8px;
+    padding: 5px 9px;
     border-radius: 4px;
     white-space: nowrap;
     letter-spacing: 0.5px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    animation: pulseHint 2s infinite ease-in-out;
+    font-weight: 600;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
     display: flex;
     align-items: center;
     gap: 4px;
-    font-weight: 400;
+    animation: pulseHintBright 1.4s infinite ease-in-out;
   }
 
-  .music-hint span { font-size: 11px; line-height: 1; }
-
-  @keyframes pulseHint {
-    0%, 100% { opacity: 0.9; transform: translateY(0); }
-    50% { opacity: 1; transform: translateY(2px); }
+  @keyframes pulseHintBright {
+    0%, 100% { opacity: 0.95; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.03); }
   }
 
   .hero {
-    min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 90px 16px 30px; position: relative;
+    min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px 16px 30px; position: relative;
     background: linear-gradient(rgba(30, 26, 23, 0.45), rgba(30, 26, 23, 0.55)),
                 url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&q=80&w=1200') center/cover no-repeat;
   }
@@ -172,23 +166,12 @@
   .wedding-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(14px, 4.5vw, 18px); letter-spacing: 3px; color: #FFFDFC; margin-bottom: 12px; text-shadow: 0 2px 8px rgba(0,0,0,0.4); text-transform: lowercase; }
 
   .hero-names {
-    font-family: 'Playfair Display', serif;
-    font-weight: 600;
-    font-size: clamp(42px, 12vw, 85px);
-    line-height: 1.1;
-    color: #FFFDFC;
-    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
-    margin-bottom: 25px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+    font-family: 'Playfair Display', serif; font-weight: 600; font-size: clamp(44px, 12vw, 82px); line-height: 1.1; color: #FFFDFC; text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); margin-bottom: 25px; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%;
   }
   .hero-names em { font-style: italic; color: #F5E5C0; font-weight: 400; display: block; }
-  .hero-ampersand { display: block; font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 9vw, 55px); color: #F5E5C0; margin: 2px 0; font-weight: 400; line-height: 1; }
+  .hero-ampersand { display: block; font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 9vw, 52px); color: #F5E5C0; margin: 2px 0; font-weight: 400; line-height: 1; }
 
-  .envelope-container { width: 100%; max-width: 320px; margin: 0 auto; position: relative; z-index: 5; padding: 0 4px; }
+  .envelope-container { width: 100%; max-width: 315px; margin: 0 auto; position: relative; z-index: 5; }
   .envelope-wrapper { position: relative; width: 100%; padding-bottom: 66%; perspective: 1500px; z-index: 10; }
   .envelope { position: absolute; inset: 0; background: #efe5d0; border-radius: 4px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); cursor: pointer; -webkit-tap-highlight-color: transparent; }
   .envelope::before { content: ''; position: absolute; inset: 4px; background: #402020 url('https://www.transparenttextures.com/patterns/royal-feather.png'); border-radius: 2px; z-index: 1; box-shadow: inset 0 0 30px rgba(0,0,0,0.85); }
@@ -196,122 +179,79 @@
   .envelope-side-right { position: absolute; inset: 0; background: #e6dac2; clip-path: polygon(100% 0, 100% 100%, 50% 50%); z-index: 4; }
   .envelope-bottom { position: absolute; inset: 0; background: #decba0; clip-path: polygon(0 100%, 50% 45%, 100% 100%); z-index: 5; }
   .envelope-flap { position: absolute; inset: 0; background: #dccaaf; clip-path: polygon(0 0, 100% 0, 50% 46%); transform-origin: top; z-index: 6; transition: transform 0.6s ease-in-out; }
+  .envelope-seal { position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); width: 48px; height: 48px; background: radial-gradient(circle at 35% 35%, #FFF2CC 0%, #D4AF37 50%, #A37F10 100%); border-radius: 50%; z-index: 7; display: flex; align-items: center; justify-content: center; color: #4A3500; font-size: 13px; font-family: 'Cormorant Garamond', serif; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.4); border: 1px solid #B38E36; }
 
-  .envelope-seal { position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); width: 50px; height: 50px; background: radial-gradient(circle at 35% 35%, #FFF2CC 0%, #D4AF37 50%, #A37F10 100%); border-radius: 50%; z-index: 7; display: flex; align-items: center; justify-content: center; color: #4A3500; font-size: 13px; font-family: 'Cormorant Garamond', serif; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.4); border: 1px solid #B38E36; }
-  .envelope-seal::after { content: ''; position: absolute; width: 100%; height: 100%; border: 2px solid #F5E5C0; border-radius: 50%; animation: goldPulse 2.2s infinite ease-in-out; pointer-events: none; }
-
-  .click-hint { margin-top: 15px; font-size: 11px; color: #FFFDFC; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+  .click-hint { margin-top: 14px; font-size: 11px; color: #FFFDFC; letter-spacing: 2px; text-transform: uppercase; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
 
   .letter {
     position: absolute; inset: 6px 10px; background: #FFFDFC url('https://www.transparenttextures.com/patterns/soft-wallpaper.png');
-    border-radius: 4px; padding: 10px 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 2; border: 1px solid #D4AF37;
+    border-radius: 4px; padding: 12px 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 2; border: 1px solid #D4AF37;
     transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
   }
-  .letter-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(15px, 4.2vw, 19px); color: var(--dark); margin-bottom: 4px; font-weight: 600; }
-  .letter-p { color: var(--text-light); font-family: 'Cormorant Garamond', serif; font-size: clamp(13px, 3.8vw, 15px); font-style: italic; line-height: 1.4; font-weight: 500; }
+  .letter-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(15px, 4.2vw, 19px); color: var(--dark); margin-bottom: 6px; font-weight: 600; }
+  .letter-p { color: var(--text-light); font-family: 'Cormorant Garamond', serif; font-size: clamp(13px, 3.8vw, 15px); font-style: italic; line-height: 1.45; }
 
   .envelope-wrapper.open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
   .envelope-wrapper.open .envelope-seal { opacity: 0; transform: translate(-50%, -50%) scale(0.5); pointer-events: none; }
   .envelope-wrapper.open .letter { transform: translateY(-64%); z-index: 8; box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
 
-  .deco-bow { display: inline-block; width: 28px; height: 28px; background-size: contain; background-repeat: no-repeat; background-position: center; vertical-align: middle; background-image: url('https://img.icons8.com/color/96/ribbon-bow.png'); }
+  .deco-bow { display: inline-block; width: 26px; height: 26px; background-size: contain; background-repeat: no-repeat; background-position: center; background-image: url('https://img.icons8.com/color/96/ribbon-bow.png'); }
 
-  .animated-heart {
-    width: 50px; height: 50px; margin: 0 auto 12px;
-    background: url('https://img.icons8.com/emoji/96/heart-suit.png') center/contain no-repeat;
-    filter: drop-shadow(0 2px 8px rgba(188,118,104,0.4));
-    animation: heartBeat 1.4s infinite ease-in-out;
-  }
+  .timer-section, .timeline-section, .calendar-section, .location-section, .rsvp-section { padding: 22px 16px; text-align: center; position: relative; z-index: 2; }
 
-  @keyframes heartBeat {
-    0% { transform: scale(1); }
-    14% { transform: scale(1.2); }
-    28% { transform: scale(1); }
-    42% { transform: scale(1.15); }
-    70% { transform: scale(1); }
-  }
-
-  .parents-section { padding: 15px 16px; display: flex; justify-content: center; position: relative; z-index: 2; }
-  .parents-card {
-    background: rgba(254, 251, 246, 0.95);
-    padding: 30px 20px; max-width: 350px; width: 100%; text-align: center;
-    position: relative; box-shadow: 0 10px 25px rgba(201,168,76,0.06);
-    border: 10px solid transparent;
-    border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M0,0 L60,0 L60,60 L0,60 Z' fill='none'/%3E%3Cpath d='M8,8 Q30,1 52,8 Q59,30 52,52 Q30,59 8,52 Q1,30 8,8' fill='none' stroke='%23C9A84C' stroke-width='1.5' stroke-dasharray='3 3'/%3E%3Cpath d='M5,5 Q30,-3 55,5 Q63,30 55,55 Q30,63 5,55 Q-3,30 5,5' fill='none' stroke='%238A6D25' stroke-width='1'/%3E%3C/svg%3E") 15 round;
-  }
-
-  .timer-section { padding: 15px 16px; text-align: center; position: relative; z-index: 2; }
-  .timer-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(18px, 5.5vw, 24px); color: var(--gold-dark); margin-bottom: 18px; font-weight: 500; }
-  .timer-container { display: flex; justify-content: center; gap: 8px; }
-  .timer-item { background: rgba(255, 253, 252, 0.95); border: 1px solid rgba(201,168,76,0.25); padding: 10px 8px; min-width: 68px; flex: 0 1 72px; border-radius: 8px; }
+  .timer-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(18px, 5.5vw, 23px); color: var(--gold-dark); margin-bottom: 16px; font-weight: 500; }
+  .timer-container { display: flex; justify-content: center; gap: 10px; }
+  .timer-item { background: rgba(255, 253, 252, 0.95); border: 2px solid rgba(201,168,76,0.38); padding: 10px 8px; min-width: 66px; flex: 0 1 72px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
   .timer-val { display: block; font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 6.5vw, 32px); color: var(--dark); font-weight: 500; line-height: 1; }
-  .timer-label { display: block; font-size: 9px; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+  .timer-label { display: block; font-size: 9px; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-top: 3px; }
 
-  .poem-section { padding: 15px 16px; display: flex; justify-content: center; position: relative; z-index: 2; }
-  .poem-card { background: rgba(255, 253, 252, 0.95); border: 1px solid rgba(201, 168, 76, 0.3); padding: 35px 20px; max-width: 520px; width: 100%; text-align: center; position: relative; border-radius: 4px; }
-  .poem-card::after { content: ''; position: absolute; inset: 6px; border: 1px solid rgba(201, 168, 76, 0.15); pointer-events: none; }
-  .poem-text { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(15px, 4.2vw, 18px); line-height: 1.6; color: var(--text); }
+  .timeline-title { text-align: center; font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(24px, 7.5vw, 32px); color: var(--dark); margin-bottom: 26px; font-weight: 500; }
+  .timeline-container { position: relative; max-width: 365px; margin: 0 auto; padding-left: 28px; }
+  .timeline-path { position: absolute; left: 11px; top: 0; height: 100%; width: 2px; border-left: 2px dashed var(--gold-solid); opacity: 0.45; }
+  .timeline-item { position: relative; padding-bottom: 22px; text-align: left; }
+  .timeline-item:last-child { padding-bottom: 5px; }
+  .timeline-dot { position: absolute; left: -22px; top: 6px; width: 11px; height: 11px; background: var(--gold-linear); border-radius: 50%; z-index: 3; border: 2px solid #FFFDFC; }
+  .timeline-content { background: rgba(255, 253, 252, 0.95); border: 2px solid rgba(201,168,76,0.32); padding: 12px 16px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+  .timeline-time { font-family: 'Cormorant Garamond', serif; font-size: clamp(19px, 4.5vw, 23px); color: var(--gold-dark); font-weight: 600; margin-bottom: 1px; display: block; }
+  .timeline-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 3.8vw, 16px); font-style: italic; color: var(--dark); font-weight: 500; }
 
-  .timeline-section { padding: 15px 16px; position: relative; z-index: 2; }
-  .timeline-title { text-align: center; font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(26px, 7.5vw, 34px); color: var(--dark); margin-bottom: 30px; font-weight: 500; }
-  .timeline-container { position: relative; max-width: 380px; margin: 0 auto; padding-left: 30px; }
-  .timeline-path { position: absolute; left: 12px; top: 0; height: 100%; width: 2px; border-left: 2px dashed var(--gold-solid); opacity: 0.5; }
-  .timeline-item { position: relative; padding-bottom: 30px; }
-  .timeline-dot { position: absolute; left: -23px; top: 6px; width: 12px; height: 12px; background: var(--gold-linear); border-radius: 50%; z-index: 3; border: 2px solid #FFFDFC; }
-  .timeline-content { background: rgba(255, 253, 252, 0.9); border: 1px solid rgba(201,168,76,0.15); padding: 14px 18px; border-radius: 12px; }
-  .timeline-time { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 4.5vw, 24px); color: var(--gold-dark); font-weight: 600; margin-bottom: 2px; display: block; }
-  .timeline-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(15px, 3.8vw, 17px); font-style: italic; color: var(--dark); font-weight: 500; }
-
-  .calendar-section { padding: 15px 16px; text-align: center; position: relative; z-index: 2; }
   .wedding-calendar {
-    background: linear-gradient(rgba(255, 253, 252, 0.92), rgba(255, 253, 252, 0.92)),
-                url('https://images.unsplash.com/photo-1607190074257-dd4b7af0309f?auto=format&fit=crop&q=80&w=400') center/cover no-repeat;
-    border: 1px solid rgba(201,168,76,0.4); border-radius: 16px; padding: 22px 14px; max-width: 310px; margin: 0 auto;
+    background: linear-gradient(rgba(255, 253, 252, 0.92), rgba(255, 253, 252, 0.92)), url('https://images.unsplash.com/photo-1607190074257-dd4b7af0309f?auto=format&fit=crop&q=80&w=400') center/cover no-repeat;
+    border: 2px solid rgba(201,168,76,0.5); border-radius: 16px; padding: 20px 14px; max-width: 305px; margin: 0 auto; box-shadow: 0 4px 15px rgba(0,0,0,0.04);
   }
-  .calendar-month { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(19px, 4.8vw, 22px); text-transform: lowercase; letter-spacing: 2px; color: var(--gold-dark); margin-bottom: 15px; font-weight: 500; }
-  .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px 1px; font-size: clamp(12px, 3.5vw, 14px); color: var(--text); }
-  .calendar-days-head { font-weight: 500; color: var(--gold-dark); font-size: 10px; text-transform: uppercase; margin-bottom: 4px; }
+  .calendar-month { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(18px, 4.8vw, 22px); text-transform: lowercase; letter-spacing: 2px; color: var(--gold-dark); margin-bottom: 12px; font-weight: 500; }
+  .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px 1px; font-size: clamp(12px, 3.5vw, 14px); }
+  .calendar-days-head { font-weight: 500; color: var(--gold-dark); font-size: 10px; text-transform: uppercase; margin-bottom: 3px; }
   .calendar-day { height: 26px; display: flex; align-items: center; justify-content: center; position: relative; }
   .calendar-day.wedding-date { font-weight: 700; color: #FFFDFC !important; z-index: 1; }
-  .calendar-day.wedding-date::before {
-    content: ''; position: absolute; width: 30px; height: 30px;
-    background: url('https://img.icons8.com/color/96/hearts.png') center/contain no-repeat;
-    z-index: -1; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  }
+  .calendar-day.wedding-date::before { content: ''; position: absolute; width: 28px; height: 28px; background: url('https://img.icons8.com/color/96/hearts.png') center/contain no-repeat; z-index: -1; top: 50%; left: 50%; transform: translate(-50%, -50%); }
 
-  .location-section { padding: 15px 16px; text-align: center; position: relative; z-index: 2;}
-  .location-card { max-width: 340px; margin: 0 auto; background: rgba(255, 253, 252, 0.95); border: 1px dashed var(--gold-solid); padding: 30px 16px; border-radius: 12px; }
-  .location-icon { width: 28px; height: 28px; margin-bottom: 10px; fill: none; stroke: var(--gold-solid); stroke-width: 1.2; }
-  .location-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 6px; font-weight: 600; }
-  .location-title { font-family: 'Playfair Display', serif; font-size: clamp(24px, 6.5vw, 30px); color: var(--dark); font-weight: 500; }
-  .location-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: var(--text-light); font-style: italic; margin-top: 4px; font-weight: 500; }
+  .location-card { max-width: 335px; margin: 0 auto; background: rgba(255, 253, 252, 0.95); border: 2px dashed var(--gold-solid); padding: 25px 16px; border-radius: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
+  .location-icon { width: 28px; height: 28px; margin-bottom: 8px; fill: none; stroke: var(--gold-solid); stroke-width: 1.5; }
+  .location-label { font-size: 11px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 4px; font-weight: 600; }
+  .location-title { font-family: 'Playfair Display', serif; font-size: clamp(23px, 6.5vw, 28px); color: var(--dark); font-weight: 500; }
+  .location-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 14.5px; color: var(--text-light); font-style: italic; margin-top: 3px; }
 
-  .parents-role { font-family: 'Playfair Display', serif; font-style: italic; font-size: 13px; color: var(--gold-dark); margin-bottom: 8px; }
-  .parents-names { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(20px, 5.5vw, 24px); font-weight: 500; color: var(--dark); }
-
-  .rsvp-section { padding: 15px 16px 50px; text-align: center; position: relative; z-index: 2; }
-  .rsvp-inner { max-width: 340px; margin: 0 auto; background: rgba(255, 253, 252, 0.95); border: 1px solid rgba(201,168,76,0.2); padding: 35px 16px; border-radius: 16px; }
-  .rsvp-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(20px, 6vw, 24px); color: var(--dark); margin-bottom: 24px; font-weight: 500; line-height: 1.3; }
-  .form-group { margin-bottom: 18px; text-align: left; }
-  .form-label { display: block; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; font-weight: 500; color: var(--gold-dark); }
-  .form-input { width: 100%; border: none; border-bottom: 1px solid rgba(201,168,76,0.35); background: transparent; padding: 6px 0; outline: none; font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; color: var(--dark); border-radius: 0; }
-  .attend-toggle { display: flex; gap: 10px; margin-top: 8px; }
+  .rsvp-inner { max-width: 335px; margin: 0 auto; background: rgba(255, 253, 252, 0.95); border: 2px solid rgba(201,168,76,0.38); padding: 30px 16px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+  .rsvp-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(19px, 6vw, 23px); color: var(--dark); margin-bottom: 20px; font-weight: 500; line-height: 1.25; }
+  .form-group { margin-bottom: 15px; text-align: left; }
+  .form-label { display: block; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; font-weight: 500; color: var(--gold-dark); }
+  .form-input { width: 100%; border: none; border-bottom: 1px solid rgba(201,168,76,0.5); background: transparent; padding: 5px 0; outline: none; font-family: 'Cormorant Garamond', serif; font-size: 19px; font-style: italic; color: var(--dark); border-radius: 0; }
+  .attend-toggle { display: flex; gap: 10px; margin-top: 6px; }
   .attend-opt { flex: 1; }
   .attend-opt input[type="radio"] { display: none; }
-  .attend-opt label { display: flex; align-items: center; justify-content: center; border: 1px solid rgba(201,168,76,0.25); padding: 12px; cursor: pointer; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; border-radius: 8px; background: #fff; font-weight: 500; -webkit-tap-highlight-color: transparent; }
+  .attend-opt label { display: flex; align-items: center; justify-content: center; border: 1px solid rgba(201,168,76,0.3); padding: 11px; cursor: pointer; font-size: 11px; text-transform: uppercase; border-radius: 8px; background: #fff; -webkit-tap-highlight-color: transparent; font-weight: 500; }
   .attend-opt input:checked + label { background: var(--dark); color: #FFFDFC; border-color: var(--dark); }
-  .submit-btn { width: 100%; padding: 15px; background: var(--dark); color: #fff; border: none; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; margin-top: 10px; border-radius: 8px; font-weight: 500; -webkit-tap-highlight-color: transparent; }
+  .submit-btn { width: 100%; padding: 13px; background: var(--dark); color: #fff; border: none; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; margin-top: 8px; border-radius: 8px; -webkit-tap-highlight-color: transparent; font-weight: 500; }
 
-  footer { background: #1A1613; text-align: center; padding: 35px 16px; color: rgba(250,246,238,0.35); border-top: 1px solid rgba(201,168,76,0.12); position: relative; z-index: 2;}
-  .footer-names { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; color: #FAF5EB; }
+  footer { background: #1A1613; text-align: center; padding: 30px 16px; color: rgba(250,246,238,0.35); border-top: 1px solid rgba(201,168,76,0.12); position: relative; z-index: 2;}
+  .footer-names { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; color: #FAF5EB; }
   .credits-phone { display: inline-block; font-size: 14px; color: #F5E5C0; text-decoration: none; font-weight: 500; border-bottom: 1px dashed rgba(245,229,192,0.3); padding-bottom: 2px; }
 </style>
 </head>
 <body id="body" class="lang-ru">
 
-<audio id="weddingMusic" preload="auto" loop>
-  <source src="music.mp3" type="audio/mpeg" />
-</audio>
+<audio id="weddingMusic" src="music.mp3?v=3" preload="auto"></audio>
 
 <div class="music-container">
   <button class="music-btn" id="musicBtn" onclick="toggleMusic()" aria-label="Воспроизвести музыку">
@@ -342,13 +282,11 @@
 <section class="hero">
   <p class="wedding-title" data-ru>Приглашение на свадьбу</p>
   <p class="wedding-title" data-tt>Туйга чакыру</p>
-
   <h1 class="hero-names">
     <em>Руслан</em>
     <span class="hero-ampersand">&amp;</span>
     <em>Розалия</em>
   </h1>
-
   <div class="envelope-container">
     <div class="envelope-wrapper" id="envelopeWrapper">
       <div class="envelope" onclick="toggleEnvelope()">
@@ -379,21 +317,6 @@
     <div class="timer-item"><span class="timer-val" id="days">00</span><span class="timer-label" data-ru>Дней</span><span class="timer-label" data-tt>Көн</span></div>
     <div class="timer-item"><span class="timer-val" id="hours">00</span><span class="timer-label" data-ru>Часов</span><span class="timer-label" data-tt>Сәгать</span></div>
     <div class="timer-item"><span class="timer-val" id="mins">00</span><span class="timer-label" data-ru>Минут</span><span class="timer-label" data-tt>Минут</span></div>
-  </div>
-</section>
-
-<div class="section-divider fade-in-section"><div class="divider-center"><div class="divider-dot"></div><div class="divider-diamond"></div><div class="divider-dot"></div></div></div>
-
-<section class="poem-section fade-in-section">
-  <div class="poem-card">
-    <div class="poem-text" data-ru>
-      В переплетении судеб и дорог,<br>Мы отыскали истинное счастье.<br>Переступив любви живой порог,<br>Мы обещаем больше не расстаться.<br><br>
-      Пусть этот день запомнится в сердцах,<br>Улыбкой близких, нежностью букетов.<br>Мы пишем повесть с блеском на глазах,<br>И приглашаем вас стать частью этой.
-    </div>
-    <div class="poem-text" data-tt>
-      Тормыш сукмаклары бергә үрелде,<br>Без таптык парлы бәхет ачкычын.<br>Мәхәббәтнең зур капкасы ачылды,<br>Ишеттек йөрәкнең назлы тавышын.<br><br>
-      Бу күркәм көн мәңге хәтердә калсын,<br>Янәшәдә булсын кадерле дуслар.<br>Бәхетле тарихны бергәләп языйк,<br>Нур чәчсен без янган якты йолдызлар.
-    </div>
   </div>
 </section>
 
@@ -473,19 +396,8 @@
 
 <div class="section-divider fade-in-section"><div class="divider-center"><div class="divider-dot"></div><div class="divider-diamond"></div><div class="divider-dot"></div></div></div>
 
-<section class="parents-section fade-in-section">
-  <div class="parents-card">
-    <p class="parents-role" data-ru>С уважением, родители жениха:</p>
-    <p class="parents-role" data-tt>Ихтирам белән, кияүнең әти-әнисе:</p>
-    <h3 class="parents-names">Равиль &amp; Рушания</h3>
-  </div>
-</section>
-
-<div class="section-divider fade-in-section"><div class="divider-center"><div class="divider-dot"></div><div class="divider-diamond"></div><div class="divider-dot"></div></div></div>
-
 <section class="rsvp-section fade-in-section">
   <div class="rsvp-inner">
-    <div class="animated-heart"></div>
     <h2 class="rsvp-title">
       <span data-ru>Подтвердите свое присутствие</span>
       <span data-tt>Катнашуыгызны раслагыз</span>
@@ -532,34 +444,22 @@
   const audioEl = document.getElementById('weddingMusic');
   const musicBtnEl = document.getElementById('musicBtn');
 
-  // Явно выставляем громкость и снимаем mute на случай, если это было
-  // установлено где-то ещё (например, настройками браузера по умолчанию).
   audioEl.volume = 1;
   audioEl.muted = false;
+  audioEl.loop = false;
 
-  // Диагностика для консоли: как только браузер понял, сколько длится
-  // файл и что он валиден, покажем длительность и громкость.
-  // duration = NaN или 0 обычно означает, что файл пустой/битый.
-  audioEl.addEventListener('loadedmetadata', function () {
-    console.log('music.mp3 загружен. Длительность (сек):', audioEl.duration, 'громкость:', audioEl.volume, 'muted:', audioEl.muted);
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden && !audioEl.paused) {
+      audioEl.pause();
+      musicBtnEl.classList.remove('playing');
+    }
   });
 
-  // Открыть в консоли: weddingAudio.duration, weddingAudio.volume и т.д.
-  window.weddingAudio = audioEl;
-
-  // Диагностика: если файл music.mp3 не найден рядом с этой HTML-страницей
-  // (не загружен на хостинг, не в той папке, либо не совпадает регистр имени),
-  // браузер сгенерирует событие "error" — покажем это явно в консоли и подсветим кнопку.
-  audioEl.addEventListener('error', function () {
+  audioEl.addEventListener('ended', function() {
     musicBtnEl.classList.remove('playing');
-    musicBtnEl.classList.add('error');
-    musicBtnEl.title = 'Файл music.mp3 не найден рядом с этой страницей. Проверьте, что он загружен в ту же папку и называется именно "music.mp3" (с учётом регистра).';
-    console.error('Аудиофайл music.mp3 не загрузился. Убедитесь, что он лежит в той же папке, что и index.html, и имя написано точно строчными буквами.');
+    audioBusy = false;
   });
 
-  // Защита от гонки: пока предыдущий play()/pause() не завершился,
-  // игнорируем повторные клики — именно повторный вызов pause() поверх
-  // ещё не выполнившегося play() и порождает AbortError.
   let audioBusy = false;
 
   function toggleMusic() {
@@ -579,15 +479,9 @@
           audioBusy = false;
         }).catch(function (error) {
           audioBusy = false;
-          if (error.name === 'AbortError') {
-            // play() был прерван последующим pause() — это не настоящая
-            // ошибка (обычно из-за двойного клика), ничего не делаем.
-            return;
-          }
+          if (error.name === 'AbortError') return;
           musicBtnEl.classList.remove('playing');
           musicBtnEl.classList.add('error');
-          musicBtnEl.title = 'Файл music.mp3 не найден рядом с этой страницей. Проверьте, что он загружен в ту же папку и называется именно "music.mp3" (с учётом регистра).';
-          console.error('Не удалось воспроизвести music.mp3:', error);
         });
       } else {
         audioBusy = false;
